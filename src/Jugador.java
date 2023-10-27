@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Jugador extends Persona{
+public class Jugador extends Persona implements ABMInterface{
 
     private static ArrayList<Jugador> Jugadores = new ArrayList<Jugador>();
 
@@ -9,7 +9,18 @@ public class Jugador extends Persona{
 
     private int MinutosJugados;
 
-    public static void AddPlayer(){
+    public Jugador() {
+
+    }
+    public Jugador(int ced,String nom,String ape,String pos, String equip, int minutos,double sueldo){
+        super(ced,nom,ape,sueldo);
+        this.Posicion=pos;
+        this.Equipo = equip;
+        this.MinutosJugados=minutos;
+    }
+
+    @Override
+    public void Add() {
         if(Jugadores.size()==14){
             System.out.println(Menu.red);
             System.out.println("Numero máximo de jugadores alcanzado");
@@ -18,11 +29,11 @@ public class Jugador extends Persona{
         }
 
         System.out.println(Menu.yellow);
-        int cedula = Menu.RequestNumber("Ingrese cedula ");
+        int cedula = Menu.RequestNumber("Ingrese Cédula ");
         Menu.Keyboard.nextLine();
         String nombre = Menu.RequestString("Ingrese Nombre ");
         String apellido = Menu.RequestString("Ingrese Apellido ");
-        String posicion = Menu.RequestString("Ingrese Posicion ");
+        String posicion = Menu.RequestString("Ingrese Posición ");
         String equipo = Menu.RequestString("Ingrese Equipo ");
         int minutos = Menu.RequestNumber("Ingrese Minutos ");
         Menu.Keyboard.nextLine();
@@ -39,17 +50,17 @@ public class Jugador extends Persona{
                 System.out.println(Menu.red+"NO SE PERMITE AGREGAR MÁS DE 2 EQUIPOS DIFERENTES"+Menu.resetColor);
             }
         }
-
     }
 
     public static void ShowPlayers(){
         if(Jugadores.isEmpty()){
-            System.out.println(Menu.red + "No hay jugadores Disponibles"+Menu.resetColor);
+            System.out.println(Menu.red + "No hay jugadores disponibles"+Menu.resetColor);
         }else{
             ListAll();
         }
     }
-    public static void DeletePlayer(){
+    @Override
+    public void Delete() {
         if(Jugadores.isEmpty()){
             System.out.println(Menu.red+"NO HAY JUGADORES QUE ELIMINAR"+Menu.resetColor);
         }else{
@@ -67,13 +78,14 @@ public class Jugador extends Persona{
             }
         }
     }
-    public static void UpdatePlayer(){
+    @Override
+    public void Update() {
         if(Jugadores.isEmpty()){
-            System.out.println(Menu.red + "No hay jugadores Disponibles"+Menu.resetColor);
+            System.out.println(Menu.red + "No hay jugadores disponibles"+Menu.resetColor);
             return;
         }
         ListAll();
-        int numero = Menu.RequestNumber("Eliga el numero del jugador que desea actualizar: ")-1;
+        int numero = Menu.RequestNumber("Elija el número del jugador que desea actualizar: ")-1;
         if(numero<0||numero>Jugadores.size()-1){
             System.out.println(Menu.red + "El número no es válido"+ Menu.resetColor);
             return;
@@ -82,12 +94,12 @@ public class Jugador extends Persona{
         Jugador datosViejos = Jugador.Jugadores.get(numero);
         Jugador Jugadorviejo = new Jugador(datosViejos.GetCedula(),datosViejos.GetNombre(),datosViejos.GetApellido(),datosViejos.Posicion,datosViejos.Equipo, datosViejos.MinutosJugados,datosViejos.GetSueldo());
 
-        int cedula = Menu.RequestNumber("Ingrese cedula ");
+        int cedula = Menu.RequestNumber("Ingrese Cédula ");
         Menu.Keyboard.nextLine();
-        String nombre = Menu.RequestString("Ingrese Nombre");
-        String apellido = Menu.RequestString("Ingrese Apellido");
-        String posicion = Menu.RequestString("Ingrese Posicion");
-        String equipo = Menu.RequestString("Ingrese Equipo");
+        String nombre = Menu.RequestString("Ingrese Nombre ");
+        String apellido = Menu.RequestString("Ingrese Apellido ");
+        String posicion = Menu.RequestString("Ingrese Posición ");
+        String equipo = Menu.RequestString("Ingrese Equipo ");
         int minutos = Menu.RequestNumber("Ingrese Minutos ");
         Menu.Keyboard.nextLine();
         double sueldo = Menu.RequestNumberDouble("Ingrese un Sueldo ");
@@ -129,27 +141,19 @@ public class Jugador extends Persona{
         return sueldo*(1.20);
     }
 
-
-    public Jugador(int ced,String nom,String ape,String pos, String equip, int minutos,double sueldo){
-        super(ced,nom,ape,sueldo);
-        this.Posicion=pos;
-        this.Equipo = equip;
-        this.MinutosJugados=minutos;
-    }
-
-
     private String ListItem(){
-        return Menu.green +"ci: " +super.GetCedula() + " " + "nombre: "+ super.GetNombre() + " " + "apellido: "+super.GetApellido() +
-                " " + "Posicion: "+ this.Posicion + " Equipo: "+ this.Equipo + " Minutos: "+ this.MinutosJugados + Menu.resetColor;
+        return Menu.green +"CI: " +super.GetCedula() + " | " + "Nombre: "+ super.GetNombre() + " | " + "Apellido: "+super.GetApellido() +
+                " | " + "Posición: "+ this.Posicion + " | " + "Equipo: "+ this.Equipo + " | " + " Minutos: "+ this.MinutosJugados + " | ";
     }
 
     private static void ListAll(){
         int num = 1;
         for (Jugador unjug:Jugadores){
-            System.out.println(num + ". " + unjug.ListItem() + " $ "+CalcularSueldo(unjug));
+            System.out.println(num + ". " + unjug.ListItem() + " $ "+CalcularSueldo(unjug) + Menu.resetColor);
             num++;
         }
     }
+
 
 
 

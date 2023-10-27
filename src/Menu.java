@@ -18,14 +18,14 @@ public class Menu {
 
         while(!salir){
             System.out.println(blue);
-            System.out.println("MENU PRINCIPAL:");
-            System.out.println("1. Menu Jugadores");
-            System.out.println("2. Menu Técnicos");
-            System.out.println("3. Menu Árbitro");
+            System.out.println("MENÚ PRINCIPAL:");
+            System.out.println("1. Menú Jugadores");
+            System.out.println("2. Menú Técnicos");
+            System.out.println("3. Menú Árbitro");
             System.out.println("0. Salir");
             System.out.println(resetColor);
 
-            int num = RequestNumber("Eliga una opción: ");
+            int num = RequestNumber("Elija una opción: ");
                 switch (num) {
                     case 1 -> MenuJugadores();
                     case 2 -> MenuTecnicos();
@@ -38,86 +38,89 @@ public class Menu {
 
     private static void MenuJugadores(){
         boolean salir = false;
+        Jugador jugador = new Jugador();
 
         while(!salir) {
             ClearScreen();
             System.out.println(Menu.blue);
-            System.out.println("MENU JUGADORES");
-            System.out.println("1. Mostrar jugadores");
+            System.out.println("MENÚ JUGADORES");
+            System.out.println("1. Mostrar Jugadores");
             System.out.println("2. Agregar Jugador");
             System.out.println("3. Eliminar Jugador");
             System.out.println("4. Actualizar un jugador");
-            System.out.println("0 . Atras");
+            System.out.println("0 . Atrás");
 
             System.out.println(Menu.resetColor);
 
-            int num = RequestNumber("Elige una opcion: ");
+            int num = RequestNumber("Elija una opción: ");
 
             switch (num) {
                 case 1 -> Jugador.ShowPlayers();
-                case 2 -> Jugador.AddPlayer();
-                case 3 -> Jugador.DeletePlayer();
-                case 4 -> Jugador.UpdatePlayer();
+                case 2 -> jugador.Add();
+                case 3 -> jugador.Delete();
+                case 4 -> jugador.Update();
                 case 0 -> salir=true;
-                default -> System.out.println(Menu.red+"No es un numero válido"+Menu.resetColor);
+                default -> System.out.println(Menu.red+"No es un número válido"+Menu.resetColor);
             }
         }
     }
 
     private static void MenuArbitros(){
         boolean salir = false;
+        Arbitro arbitro = new Arbitro();
 
         while(!salir) {
             ClearScreen();
             System.out.println(Menu.blue);
-            System.out.println("MENU ARBITROS");
-            System.out.println("1. Mostrar Arbitro");
-            System.out.println("2. Agregar/Actualizar Arbitro");
-            System.out.println("3. Eliminar Arbitro");
-            System.out.println("0 . Atras");
+            System.out.println("MENU ÁRBITROS");
+            System.out.println("1. Mostrar Árbitro");
+            System.out.println("2. Agregar/Actualizar Árbitro");
+            System.out.println("3. Eliminar Árbitro");
+            System.out.println("0 . Atrás");
 
 
 
             System.out.println(Menu.resetColor);
 
-            int num = RequestNumber("Elige una opcion: ");
+            int num = RequestNumber("Elija una opción: ");
 
             switch (num) {
                 case 1 -> Arbitro.ShowReferee();
-                case 2 -> Arbitro.AddReferee();
-                case 3 -> Arbitro.DeleteReferee();
+                case 2 -> arbitro.Add();
+                case 3 -> arbitro.Delete();
                 case 0 ->{
                     salir=true;
                 }
                 default -> {
-                    System.out.println(Menu.red+"No es un numero válido"+Menu.resetColor);
+                    System.out.println(Menu.red+"No es un número válido"+Menu.resetColor);
                 }
             }
         }
     }
     private static void MenuTecnicos(){
         boolean salir = false;
+        Tecnico tecnico = new Tecnico();
 
         while(!salir) {
             ClearScreen();
             System.out.println(Menu.blue);
-            System.out.println("MENU Tecnicos");
-            System.out.println("1. Mostrar Tecnicos");
-            System.out.println("2. Agregar Tecnicos");
-            System.out.println("3. Eliminar Tecnicos");
-            System.out.println("4. Actualizar Tecnicos");
-            System.out.println("0 . Atras");
+            System.out.println("MENÚ TÉCNICOS");
+            System.out.println("1. Mostrar Técnicos");
+            System.out.println("2. Agregar Técnicos");
+            System.out.println("3. Eliminar Técnicos");
+            System.out.println("4. Actualizar Técnicos");
+            System.out.println("0 . Atrás");
             System.out.println(Menu.resetColor);
 
-            int num = RequestNumber("Elige una opcion: ");
+            int num = RequestNumber("Elija una opción: ");
 
             switch (num) {
                 case 1 -> Tecnico.ShowCoach();
-                case 2 -> Tecnico.AddCoach();
-                case 3 -> Tecnico.DeleteCoach();
-                case 4 -> Tecnico.UpdateCoach();
+                case 2 -> tecnico.Add();
+                case 3 -> tecnico.Delete();
+                case 4 -> tecnico.Update();
                 case 0 -> salir=true;
-                default -> System.out.println(Menu.red+"No es un numero válido"+Menu.resetColor);
+                default -> System.out.println(Menu.red+"No es un número válido"+Menu.resetColor);
             }
         }
     }

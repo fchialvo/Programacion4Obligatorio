@@ -14,6 +14,10 @@ public class Persona {
         this.Sueldo=suel;
     }
 
+    public Persona() {
+
+    }
+
     protected int GetCedula(){
         return this.Cedula;
     }
@@ -24,4 +28,5 @@ public class Persona {
         return this.Apellido;
     }
     protected double GetSueldo(){return this.Sueldo;}
+
 }

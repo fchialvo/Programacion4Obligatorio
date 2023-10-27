@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Tecnico extends Persona{
+public class Tecnico extends Persona implements ABMInterface{
 
     private static ArrayList<Tecnico> Tecnicos = new ArrayList<Tecnico>();
 
@@ -8,11 +8,16 @@ public class Tecnico extends Persona{
 
     private int TotalPartidosGanados;
 
+    public Tecnico() {
+
+    }
+
     public Tecnico(int ced,String nom,String ape, String equipo,double sueldo,int totalPartidosGanados){
         super(ced,nom,ape,sueldo);
         this.Equipo = equipo;
         this.TotalPartidosGanados = totalPartidosGanados;
     }
+
 
     public static boolean ShowCoach(){
         if(Tecnicos.isEmpty()){
@@ -22,14 +27,15 @@ public class Tecnico extends Persona{
         byte cont = 1;
         for (Tecnico untec:Tecnicos
              ) {
-            System.out.println(Menu.green + cont + ". nombre: "+untec.GetNombre() + " apellido: "+untec.GetApellido() + " Equipo: "+ untec.Equipo+ " $"+ CalcularSueldo(untec)+ Menu.resetColor);
+            System.out.println(Menu.green + cont + ". Nombre: "+untec.GetNombre() + " | Apellido: "+untec.GetApellido() + " | Equipo: "+ untec.Equipo+ " | $"+ CalcularSueldo(untec)+ Menu.resetColor);
             cont++;
         }
         return true;
     }
 
 
-    public static void AddCoach(){
+    @Override
+    public void Add(){
         if(TooManyCoaches()){
             return;
         }
@@ -49,7 +55,8 @@ public class Tecnico extends Persona{
         }
     }
 
-    public static void DeleteCoach(){
+    @Override
+    public void Delete(){
         if(!ShowCoach()){
             return;
         }
@@ -60,7 +67,8 @@ public class Tecnico extends Persona{
             Tecnicos.remove(Tecnicos.get(num));
         }
     }
-    public static void UpdateCoach(){
+    @Override
+    public void Update(){
         if(!ShowCoach()){
             return;
         }
@@ -120,5 +128,4 @@ public class Tecnico extends Persona{
         if(untec.TotalPartidosGanados>=3)return untec.GetSueldo()*1.10;
         return untec.GetSueldo();
     }
-
 }
