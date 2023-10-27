@@ -52,13 +52,6 @@ public class Jugador extends Persona implements ABMInterface{
         }
     }
 
-    public static void ShowPlayers(){
-        if(Jugadores.isEmpty()){
-            System.out.println(Menu.red + "No hay jugadores disponibles"+Menu.resetColor);
-        }else{
-            ListAll();
-        }
-    }
     @Override
     public void Delete() {
         if(Jugadores.isEmpty()){
@@ -113,6 +106,15 @@ public class Jugador extends Persona implements ABMInterface{
             Jugadores.add(Jugadorviejo);
         }
     }
+
+    public static void ShowPlayers(){
+        if(Jugadores.isEmpty()){
+            System.out.println(Menu.red + "No hay jugadores disponibles"+Menu.resetColor);
+        }else{
+            ListAll();
+        }
+    }
+
 
     private static int TotalTeams(){
         int totalTeams = 0;
